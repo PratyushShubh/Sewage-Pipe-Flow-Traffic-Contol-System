@@ -1,0 +1,104 @@
+//this code will turn respective led on if the ultrasonic senesors detect an object
+
+int trigger1 = 13;
+int echo1 = 12;
+int trigger2 = 11;
+int echo2 = 10;
+int trigger3 = 9;
+int echo3 = 8;
+int trigger4 = 7;
+int echo4 = 6;
+const int led1 = 5;
+const int led2 = 4;
+const int led3 = 3;
+const int led4 = 2;
+const int threshold = 200;
+long duration1, duration2, duration3, duration4;
+long cm1, cm2, cm3, cm4;
+
+void setup() {
+  Serial.begin(9600); // Initialize serial communication
+  pinMode(trigger1, OUTPUT);
+  pinMode(echo1, INPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(trigger2, OUTPUT);
+  pinMode(echo2, INPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(trigger3, OUTPUT);
+  pinMode(echo3, INPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(trigger4, OUTPUT);
+  pinMode(echo4, INPUT);
+  pinMode(led4, OUTPUT);
+}
+
+void loop() {
+  pipe1();
+  pipe2();
+  pipe3();
+  pipe4();
+}
+
+void pipe1() {
+  digitalWrite(trigger1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger1, LOW);
+  duration1 = pulseIn(echo1, HIGH);
+  cm1 = duration1 / 58;
+
+  if (cm1 < threshold) {
+    digitalWrite(led1, HIGH);
+  } else {
+    digitalWrite(led1, LOW);
+  }
+}
+
+void pipe2() {
+  digitalWrite(trigger2, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger2, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger2, LOW);
+  duration2 = pulseIn(echo2, HIGH);
+  cm2 = duration2 / 58;
+
+  if (cm2 < threshold) {
+    digitalWrite(led2, HIGH);
+  } else {
+    digitalWrite(led2, LOW);
+  }
+}
+
+void pipe3() {
+  digitalWrite(trigger3, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger3, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger3, LOW);
+  duration3 = pulseIn(echo3, HIGH);
+  cm3 = duration3 / 58;
+
+  if (cm3 < threshold) {
+    digitalWrite(led3, HIGH);
+  } else {
+    digitalWrite(led3, LOW);
+  }
+}
+
+void pipe4() {
+  digitalWrite(trigger4, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger4, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger4, LOW);
+  duration4 = pulseIn(echo4, HIGH);
+  cm4 = duration4 / 58;
+
+  if (cm4 < threshold) {
+    digitalWrite(led4, HIGH);
+  } else {
+    digitalWrite(led4, LOW);
+  }
+}
